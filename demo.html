@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Datanaut.ai</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    /* Modal styles */
+    #modal { display: none; background: rgba(0,0,0,0.8); position: fixed; inset: 0; justify-content: center; align-items: center; z-index: 50; }
+    #modal img { max-width: 90%; max-height: 90%; border-radius: 0.5rem; }
+  </style>
+</head>
+<body class="bg-neutral-950 text-neutral-200">
+
+  <!-- Header / Hero -->
+  <header class="py-16 text-center">
+    <div class="max-w-4xl mx-auto px-6">
+      <h1 class="text-5xl font-bold text-white">Datanaut.ai</h1>
+      <p class="mt-3 text-sm text-neutral-400">Exploratory Data Analytics Tool</p>
+
+      <div class="mt-8 flex justify-center gap-4">
+        <a href="https://datanaut.onrender.com/" target="_blank"
+           class="bg-indigo-600 text-white font-medium px-6 py-3  hover:bg-indigo-500 transition">
+          Live Demo
+        </a>
+        <a href="https://github.com/shark4real/data" target="_blank"
+           class="border border-neutral-700 text-neutral-200 px-5 py-3  hover:bg-neutral-900 transition">
+          GitHub
+        </a>
+      </div>
+
+      <p class="mt-4 text-xs text-neutral-500">Hosted on Render Free Tier – may take up to a minute to load</p>
+    </div>
+  </header>
+
+  <!-- Screenshots Carousel -->
+  <section class="py-12 bg-neutral-900">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-2xl font-semibold text-white text-center mb-6">Screenshots</h2>
+      <div class="relative">
+        <button id="prev" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-neutral-800 text-white px-3 py-2 rounded-md z-10 hover:bg-neutral-700 transition">‹</button>
+        <div id="carousel" class="flex overflow-x-auto snap-x snap-mandatory gap-4 no-scrollbar scroll-smooth">
+          <img src="Landing.png" alt="Screenshot 1" class="w-72 h-48 object-cover rounded-md snap-center border border-neutral-800 shadow-lg cursor-pointer">
+          <img src="Main.png" alt="Screenshot 2" class="w-72 h-48 object-cover rounded-md snap-center border border-neutral-800 shadow-lg cursor-pointer">
+          <img src="Previewdataset.png" alt="Screenshot 3" class="w-72 h-48 object-cover rounded-md snap-center border border-neutral-800 shadow-lg cursor-pointer">
+          <img src="English.png" alt="Screenshot 4" class="w-72 h-48 object-cover rounded-md snap-center border border-neutral-800 shadow-lg cursor-pointer">
+          <img src="Visualise.png" alt="Screenshot 5" class="w-72 h-48 object-cover rounded-md snap-center border border-neutral-800 shadow-lg cursor-pointer">
+          <img src="Quick_query.png" alt="Screenshot 6" class="w-72 h-48 object-cover rounded-md snap-center border border-neutral-800 shadow-lg cursor-pointer">
+          <img src="Autogenrated.png" alt="Screenshot 7" class="w-72 h-48 object-cover rounded-md snap-center border border-neutral-800 shadow-lg cursor-pointer">
+        </div>
+        <button id="next" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-neutral-800 text-white px-3 py-2 rounded-md z-10 hover:bg-neutral-700 transition">›</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fullscreen Modal -->
+  <div id="modal" class="flex">
+    <img id="modal-img" src="" alt="Full Screenshot">
+  </div>
+
+  <!-- About -->
+  <section class="py-12">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="bg-neutral-900 border border-neutral-800 rounded-md p-8">
+        <h2 class="text-2xl font-semibold text-white text-center mb-4">About</h2>
+        <p class="text-neutral-400 leading-relaxed text-center max-w-3xl mx-auto">
+          Datanaut.ai is your smart data analytics assistant. Upload your datasets, uncover insights instantly,
+          and make informed decisions effortlessly. It's designed to help everyone from data enthusiasts to
+          business leaders make sense of data quickly.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-12 bg-neutral-900">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="p-6 rounded-md border border-neutral-800 bg-neutral-920 text-center">
+          <h3 class="font-medium text-white mb-2">Smart Upload</h3>
+          <p class="text-neutral-400 text-sm">CSV, Excel, JSON support with automatic schema detection</p>
+        </div>
+
+        <div class="p-6 rounded-md border border-neutral-800 bg-neutral-920 text-center">
+          <h3 class="font-medium text-white mb-2">Instant Insights</h3>
+          <p class="text-neutral-400 text-sm">Auto-generated visualizations and statistical summaries</p>
+        </div>
+
+        <div class="p-6 rounded-md border border-neutral-800 bg-neutral-920 text-center">
+          <h3 class="font-medium text-white mb-2">Plain English</h3>
+          <p class="text-neutral-400 text-sm">Ask questions naturally and get SQL queries generated</p>
+        </div>
+
+        <div class="p-6 rounded-md border border-neutral-800 bg-neutral-920 text-center">
+          <h3 class="font-medium text-white mb-2">Export Ready</h3>
+          <p class="text-neutral-400 text-sm">Save analysis as PDF, PPTX, or high-quality images</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 text-center border-t border-neutral-800">
+    <p class="text-neutral-500 text-sm">Built by SHARIK &amp; JOYCE</p>
+    <p class="text-neutral-500 text-xs mt-2">© 2025 Datanaut.ai</p>
+  </footer>
+
+  <!-- Carousel + Modal JS -->
+  <script>
+    const carousel = document.getElementById('carousel');
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+    const scrollAmount = 300;
+
+    // Manual buttons
+    prev.addEventListener('click', () => {
+      carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+    next.addEventListener('click', () => {
+      carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+
+    // Auto-slide every 3 seconds
+    setInterval(() => {
+      carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }, 3000);
+
+    // Modal functionality
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modal-img');
+    const images = carousel.querySelectorAll('img');
+
+    images.forEach(img => {
+      img.addEventListener('click', () => {
+        modal.style.display = 'flex';
+        modalImg.src = img.src;
+      });
+    });
+
+    modal.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
