@@ -10,8 +10,28 @@
     body { font-family: 'Inter', sans-serif; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    #modal { display: none; background: rgba(0,0,0,0.8); position: fixed; inset: 0; justify-content: center; align-items: center; z-index: 50; }
-    #modal img { max-width: 90%; max-height: 90%; border-radius: 0.5rem; }
+    #modal { 
+      display: none; 
+      background: rgba(0,0,0,0.8); 
+      position: fixed; 
+      inset: 0; 
+      justify-content: center; 
+      align-items: center; 
+      z-index: 50; 
+    }
+    #modal img { 
+      max-width: 90%; 
+      max-height: 90%; 
+      border-radius: 0.5rem; 
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    }
+    #modal button {
+      opacity: 0.8;
+      transition: opacity 0.2s ease;
+    }
+    #modal button:hover {
+      opacity: 1;
+    }
   </style>
 </head>
 <body class="bg-neutral-950 text-neutral-200">
@@ -118,6 +138,7 @@
     const next = document.getElementById('next');
     const scrollAmount = 300;
 
+    // Carousel scroll buttons
     prev.addEventListener('click', () => {
       carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
     });
@@ -125,23 +146,73 @@
       carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     });
 
+    // Auto-scroll every 3s
     setInterval(() => {
       carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }, 3000);
 
+    // Modal functionality
     const modal = document.getElementById('modal');
     const modalImg = document.getElementById('modal-img');
-    const images = carousel.querySelectorAll('img');
+    const images = Array.from(carousel.querySelectorAll('img'));
+    let currentIndex = 0;
 
-    images.forEach(img => {
+    // Create next/prev buttons inside modal
+    const modalPrev = document.createElement('button');
+    const modalNext = document.createElement('button');
+    Object.assign(modalPrev, {
+      innerHTML: '‹',
+      className:
+        'absolute left-5 top-1/2 transform -translate-y-1/2 bg-neutral-800 text-white px-3 py-2 rounded-md hover:bg-neutral-700 text-2xl font-bold transition',
+    });
+    Object.assign(modalNext, {
+      innerHTML: '›',
+      className:
+        'absolute right-5 top-1/2 transform -translate-y-1/2 bg-neutral-800 text-white px-3 py-2 rounded-md hover:bg-neutral-700 text-2xl font-bold transition',
+    });
+    modal.appendChild(modalPrev);
+    modal.appendChild(modalNext);
+
+    // Open modal on image click
+    images.forEach((img, index) => {
       img.addEventListener('click', () => {
         modal.style.display = 'flex';
         modalImg.src = img.src;
+        currentIndex = index;
       });
     });
 
-    modal.addEventListener('click', () => {
-      modal.style.display = 'none';
+    // Close modal when background clicked
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+
+    // Navigate inside modal
+    modalPrev.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      modalImg.src = images[currentIndex].src;
+    });
+
+    modalNext.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentIndex = (currentIndex + 1) % images.length;
+      modalImg.src = images[currentIndex].src;
+    });
+
+    // Keyboard navigation (←, →, Esc)
+    document.addEventListener('keydown', (e) => {
+      if (modal.style.display === 'flex') {
+        if (e.key === 'ArrowLeft') {
+          modalPrev.click();
+        } else if (e.key === 'ArrowRight') {
+          modalNext.click();
+        } else if (e.key === 'Escape') {
+          modal.style.display = 'none';
+        }
+      }
     });
   </script>
 </body>
